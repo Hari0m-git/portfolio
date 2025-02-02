@@ -29,15 +29,11 @@ function About(props) {
   const [data, setData] = useState(null);
 
   const parseIntro = (text) => (
-    <ReactMarkdown
-      children={text}
-    />
+    <ReactMarkdown children={text} />
   );
 
   useEffect(() => {
-    fetch(endpoints.about, {
-      method: 'GET',
-    })
+    fetch(endpoints.about, { method: 'GET' })
       .then((res) => res.json())
       .then((res) => setData(res))
       .catch((err) => err);
@@ -48,20 +44,28 @@ function About(props) {
       <Header title={header} />
       <div className="section-content-container">
         <Container>
-          {data
-            ? (
-              <Fade>
-                <Row>
-                  <Col style={styles.introTextContainer}>
-                    {parseIntro(data.about)}
-                  </Col>
-                  <Col style={styles.introImageContainer}>
-                    <img src={data?.imageSource} alt="profile" />
-                  </Col>
-                </Row>
-              </Fade>
-            )
-            : <FallbackSpinner />}
+          {data ? (
+            <Fade>
+              {/* Intro Text at top and centered */}
+              <Row className="justify-content-center mb-4">
+                <Col xs={12} md={8} style={styles.introTextContainer}>
+                  {parseIntro(data.about)}
+                </Col>
+              </Row>
+              {/* Image below the intro and centered */}
+              <Row className="justify-content-center">
+                <Col xs="auto" style={styles.introImageContainer}>
+                  <img
+                    src={data?.imageSource}
+                    alt="profile"
+                    style={{ maxWidth: '400px', width: '100%', height: 'auto' }}
+                  />
+                </Col>
+              </Row>
+            </Fade>
+          ) : (
+            <FallbackSpinner />
+          )}
         </Container>
       </div>
     </>

@@ -11,11 +11,20 @@ const styles = {
   iconStyle: {
     height: 75,
     width: 75,
-    margin: 10,
+    margin: '20px 30px',
     marginBottom: 0,
   },
   introTextContainer: {
     whiteSpace: 'pre-wrap',
+  },
+  skillBox: {
+    display: 'inline-block',
+    margin: '10px 20px',
+    textAlign: 'center',
+    minWidth: '120px',
+  },
+  skillsRow: {
+    marginBottom: '40px',
   },
 };
 
@@ -47,11 +56,11 @@ function Skills(props) {
             <Container>
               {renderSkillsIntro(data.intro)}
               {data.skills?.map((rows) => (
-                <div key={rows.title}>
+                <div key={rows.title} style={styles.skillsRow}>
                   <br />
                   <h3>{rows.title}</h3>
                   {rows.items.map((item) => (
-                    <div key={item.title} style={{ display: 'inline-block' }}>
+                    <div key={item.title} style={styles.skillBox}>
                       <img
                         style={styles.iconStyle}
                         src={item.icon}
